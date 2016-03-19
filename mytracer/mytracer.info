@@ -1,0 +1,7 @@
+name = mytracer
+description = 追踪用户信息被浏览的记录
+core = 7.x
+package = 我的模组
+dependencies[] = views
+files[] = mytracer.module
+configure = admin/config/people/mytracer
