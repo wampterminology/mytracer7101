@@ -1,0 +1,84 @@
+<?php
+
+//
+//Implement hook_schema
+//
+function mytracer_schema() {
+ $schema['mytracer'] = array(
+    'description' => 'The base table for mytracer.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for mytracer table.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid_was_visited' => array(
+        'description' => 'uid of whom was visited ',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'uid_watched' => array(
+        'description' => 'uid of who watched other users ',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+       'visited_time' => array(
+        'description' => 'the timestamp of watching event happened ',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+       'ip' => array(
+        'description' => 'the ip address of who watched ',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      
+    ),
+    'indexes' => array(
+      'uid_was_visited' => array('uid_was_visited','visited_time'),
+      'uid_watched' => array('uid_watched','visited_time'),
+    ),
+
+    'foreign keys' => array(
+      'uid_was_visited' => array(
+        'table' => 'users',
+        'columns' => array('uid_was_visited' => 'uid'),
+      ),
+      'uid_watched' => array(
+        'table' => 'users',
+        'columns' => array('uid_watched' => 'uid'),
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}
+
+//
+//Implement hook_install
+//
+function mytracer_install(){
+  
+}
+
+//
+//Implement hook_install
+//
+function mytracer_update_N(&$sandbox){
+  //mytracer_update_7101
+}
+
+//
+//Implement mytracer_install
+//
+function mytracer_uninstall(){
+  
+}
